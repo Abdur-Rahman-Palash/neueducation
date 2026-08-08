@@ -6,10 +6,11 @@ interface ButtonProps {
   variant?: "primary" | "secondary" | "urgency";
   href?: string;
   className?: string;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
 
-export function Button({ children, variant = "primary", href, className = "", onClick }: ButtonProps) {
+export function Button({ children, variant = "primary", href, className = "", type, onClick }: ButtonProps) {
   const base = "inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200";
   const variants = {
     primary: "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dark)]",
@@ -28,7 +29,7 @@ export function Button({ children, variant = "primary", href, className = "", on
   }
 
   return (
-    <button type="button" className={classes} onClick={onClick} {...extraProps}>
+    <button type={type ?? "button"} className={classes} onClick={onClick} {...extraProps}>
       {children}
     </button>
   );

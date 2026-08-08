@@ -21,8 +21,6 @@ export function AnimatedLayout({ children }: { children: ReactNode }) {
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
-      smoothTouch: true,
       touchMultiplier: 2,
       lerp: 0.08,
     });
@@ -32,7 +30,7 @@ export function AnimatedLayout({ children }: { children: ReactNode }) {
 
     ScrollTrigger.scrollerProxy(document.documentElement, {
       scrollTop(value) {
-        if (arguments.length) {
+        if (arguments.length && typeof value === "number") {
           lenis.scrollTo(value, { immediate: false });
           return;
         }
