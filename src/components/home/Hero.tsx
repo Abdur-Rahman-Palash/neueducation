@@ -8,7 +8,7 @@ export function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-[#EAF0FF] py-20 sm:py-24 lg:py-28">
+    <section className="relative overflow-x-hidden bg-[#EAF0FF] py-20 sm:py-24 lg:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(20,71,230,0.08),_transparent_45%)]" />
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <motion.div
@@ -22,7 +22,7 @@ export function Hero() {
             Inspired by the Deoband tradition of learning
           </motion.div>
 
-          <motion.h1 variants={fadeUp} className="max-w-3xl text-4xl font-extrabold leading-tight text-[#0B1739] sm:text-5xl lg:text-6xl">
+          <motion.h1 variants={fadeUp} className="max-w-3xl text-3xl font-extrabold leading-tight text-[#0B1739] sm:text-4xl sm:leading-tight md:text-5xl lg:text-6xl">
             Build your foundation, <span className="text-[#1447E6]">thrive in faith and life</span>.
           </motion.h1>
 
@@ -30,17 +30,17 @@ export function Hero() {
             Classical learning and modern practice, brought together in one clear learning experience. Study Quran, Hadith, Fiqh, and practical subjects with guided support.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-            <a href="/courses" className="inline-flex items-center gap-2 rounded-xl border border-[#1447E6] px-5 py-3 text-sm font-semibold text-[#1447E6] transition hover:bg-white">
+          <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="/courses" className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#1447E6] px-5 py-3 text-sm font-semibold text-[#1447E6] transition hover:bg-white sm:w-auto">
               Explore Courses
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="/signup" className="inline-flex items-center gap-2 rounded-xl bg-[#1447E6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#12297A]">
+            <a href="/signup" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1447E6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#12297A] sm:w-auto">
               Enroll Now
             </a>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)]">
+          <motion.div variants={fadeUp} className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)] sm:p-5">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF0FF] px-3 py-1.5 text-sm font-semibold text-[#12297A]">
                 <CalendarDays className="h-4 w-4" />
@@ -51,12 +51,12 @@ export function Hero() {
                 Live classes + recordings
               </span>
             </div>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <button className="inline-flex items-center gap-2 rounded-xl border border-[#1447E6] px-4 py-2.5 text-sm font-semibold text-[#1447E6]">
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <button className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#1447E6] px-4 py-2.5 text-sm font-semibold text-[#1447E6]">
                 <PlayCircle className="h-4 w-4" />
                 Watch Preview
               </button>
-              <a href="/signup" className="inline-flex items-center gap-2 rounded-xl bg-[#E4B343] px-4 py-2.5 text-sm font-semibold text-[#0B1739]">
+              <a href="/signup" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#E4B343] px-4 py-2.5 text-sm font-semibold text-[#0B1739]">
                 Join Today
               </a>
             </div>

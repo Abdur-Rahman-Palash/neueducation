@@ -8,8 +8,8 @@ export function MotivationSection() {
   const y = useTransform(scrollY, [0, 300], [0, 25]);
 
   return (
-    <section className="bg-[#0B1739] py-20 text-white">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+    <section className="overflow-x-hidden bg-[#0B1739] py-20 text-white">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <div>
           <h2 className="text-3xl font-extrabold sm:text-4xl">
             One <span className="text-[#E4B343]">bold step</span> can open the whole road
@@ -23,7 +23,7 @@ export function MotivationSection() {
         </div>
 
         <motion.div style={prefersReducedMotion ? undefined : { y }} className="flex justify-center">
-          <div className="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/10 p-6 backdrop-blur">
+          <div className="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/10 p-4 backdrop-blur sm:p-6">
             <svg viewBox="0 0 320 260" className="w-full" role="img" aria-label="Motivation illustration">
               <rect x="26" y="28" width="268" height="204" rx="32" fill="#12297A" />
               <circle cx="168" cy="114" r="58" fill="#E4B343" />

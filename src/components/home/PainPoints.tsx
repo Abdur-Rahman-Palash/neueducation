@@ -36,7 +36,7 @@ export function PainPoints() {
         </h2>
       </motion.div>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card, index) => {
           const Icon = card.icon;
           return (
@@ -46,7 +46,7 @@ export function PainPoints() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`rounded-2xl border border-slate-200 p-6 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)] ${card.tint}`}
+              className={`rounded-2xl border border-slate-200 p-4 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)] sm:p-6 ${card.tint}`}
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/80 text-[#1447E6]">
                 <Icon className="h-6 w-6" />

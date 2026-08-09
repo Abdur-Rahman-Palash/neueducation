@@ -1,34 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { useAuthStore } from "@/store/authStore";
+import { getRoleLandingPath, useAuthStore } from "@/store/authStore";
 
 export default function LoginPage() {
   const router = useRouter();
   const login = useAuthStore((state) => state.login);
-  const signup = useAuthStore((state) => state.signup);
-  const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("student@neu.edu");
   const [password, setPassword] = useState("password123");
-  const [name, setName] = useState("Aisha Khan");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    if (mode === "login") {
-      const ok = login(email, password);
-      if (!ok) {
-        setError("Use student@neu.edu, teacher@neu.edu, or admin@neu.edu with password123.");
-        return;
-      }
-      router.replace("/");
+  useEffect(() => {
+    if (typeof window === "undefined") {
       return;
     }
-    signup(name, email);
-    router.replace("/");
+
+    const params = new URLSearchParams(window.location.search);
+    const emailFromQuery = params.get("email");
+
+    if (emailFromQuery) {
+      setEmail(emailFromQuery);
+    }
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter your email and password to continue.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError("");
+
+    const ok = login(email, password);
+
+    if (!ok) {
+      setIsSubmitting(false);
+      setError("Use a valid role account from the signup flow or the seeded demo credentials.");
+      return;
+    }
+
+    const signedInUser = useAuthStore.getState().user;
+    const rolePath = getRoleLandingPath(signedInUser?.role);
+
+    setIsSubmitting(false);
+    router.replace(rolePath);
   };
 
   return (
@@ -44,16 +67,15 @@ export default function LoginPage() {
           <p>admin@neu.edu / password123</p>
         </div>
       </div>
-      <Card className="w-full max-w-md space-y-4">
-        <div className="flex gap-3">
-          <Button variant={mode === "login" ? "primary" : "secondary"} className="flex-1" onClick={() => setMode("login")}>Login</Button>
-          <Button variant={mode === "signup" ? "primary" : "secondary"} className="flex-1" onClick={() => setMode("signup")}>Signup</Button>
-        </div>
-        {mode === "signup" ? <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} /> : null}
-        <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        {mode === "login" ? <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> : null}
-        {error ? <p className="text-sm text-[var(--color-energy)]">{error}</p> : null}
-        <Button variant="primary" className="w-full" onClick={handleSubmit}>{mode === "login" ? "Sign in" : "Create account"}</Button>
+      <Card className="w-full max-w-md">
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          {error ? <p className="text-sm text-[var(--color-energy)]">{error}</p> : null}
+          <Button type="submit" variant="primary" className="w-full rounded-full py-3" disabled={isSubmitting} isLoading={isSubmitting}>
+            Log in
+          </Button>
+        </form>
       </Card>
     </div>
   );

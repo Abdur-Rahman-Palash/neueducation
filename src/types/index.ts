@@ -40,6 +40,8 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
+  password?: string;
+  photoUrl?: string;
 }
 
 export interface Enrollment {

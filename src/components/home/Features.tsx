@@ -35,7 +35,7 @@ export function Features() {
             Why <span className="text-[#1447E6]">Neu Education</span> stands out
           </h2>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -46,7 +46,7 @@ export function Features() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={prefersReducedMotion ? undefined : { y: -6, boxShadow: "0 24px 44px -14px rgba(20,71,230,0.16)" }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)]"
+                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)] sm:p-6"
               >
                 <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.tint} text-[#1447E6]`}>
                   <Icon className="h-6 w-6" />

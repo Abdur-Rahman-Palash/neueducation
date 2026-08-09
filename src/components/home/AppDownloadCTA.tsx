@@ -7,8 +7,8 @@ export function AppDownloadCTA() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="bg-gradient-to-r from-[#12297A] to-[#0B1739] py-20 text-white">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+    <section className="overflow-x-hidden bg-gradient-to-r from-[#12297A] to-[#0B1739] py-20 text-white">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <div>
           <h2 className="text-3xl font-extrabold sm:text-4xl">
             Your learning journey, right on your <span className="text-[#E4B343]">mobile</span>

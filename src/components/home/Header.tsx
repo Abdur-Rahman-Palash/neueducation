@@ -5,8 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const links = [
   { href: "/courses", label: "Courses" },
-  { href: "/teacher", label: "Teacher Panel" },
-  { href: "/blog#stories", label: "Success Stories" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About Us" },
 ];
@@ -38,9 +36,14 @@ export function Header() {
           ))}
         </nav>
 
-        <Link href="/signup" className="rounded-xl bg-[#1447E6] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#12297A]">
-          Register Now
-        </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          <Link href="/login" className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-[#0B1739] transition hover:bg-slate-50">
+            Login
+          </Link>
+          <Link href="/signup" className="rounded-xl bg-[#1447E6] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#12297A]">
+            Sign up
+          </Link>
+        </div>
       </div>
     </motion.header>
   );

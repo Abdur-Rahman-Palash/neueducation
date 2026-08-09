@@ -30,7 +30,7 @@ export function Testimonials() {
           Student <span className="text-[#1447E6]">feedback</span>
         </h2>
       </div>
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((item, index) => (
           <motion.article
             key={item.name}
@@ -38,7 +38,7 @@ export function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)]"
+            className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_20px_40px_-12px_rgba(20,71,230,0.12)] sm:p-6"
           >
             <div className="text-[#E4B343]">★★★★★</div>
             <p className="mt-4 text-[15px] leading-relaxed text-slate-600">“{item.quote}”</p>
