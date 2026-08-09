@@ -1,29 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #155eef;
-  --color-primary-dark: #0b3fae;
-  --color-energy: #ff6a3d;
-  --color-teal: #0ea5a0;
-  --color-gold: #f5a623;
-  --color-ink: #1a1d29;
-  --color-gray: #6b7280;
-  --color-border: #e5e7eb;
-  --color-background: #ffffff;
-  --color-surface: #f4f7fe;
+  --blue-900: #0B1739;
+  --blue-800: #0F1E4D;
+  --blue-700: #12297A;
+  --blue-600: #1447E6;
+  --blue-500: #2C5CF2;
+  --blue-50: #EAF0FF;
+  --gold: #E4B343;
+  --mint: #DFF6E8;
+  --peach: #FDE9DC;
+  --lav: #EFE6FB;
+  --ink: #101828;
+  --gray-500: #667085;
+  --font-body: var(--font-hind-siliguri), "Segoe UI", Arial, sans-serif;
+  --font-display: var(--font-poppins), "Segoe UI", Arial, sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-ink);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-inter);
+  --color-background: white;
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+}
+
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: linear-gradient(135deg, #ffffff 0%, #f4f7fe 45%, #ffffff 100%);
-  color: var(--color-ink);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  background: white;
+  color: var(--ink);
+  font-family: var(--font-body);
   min-height: 100vh;
 }
 
@@ -112,5 +120,5 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-sora), Arial, Helvetica, sans-serif;
+  font-family: var(--font-display);
 }

@@ -1,5 +1,5 @@
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Footer } from "@/components/home/Footer";
+import { Header } from "@/components/home/Header";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (

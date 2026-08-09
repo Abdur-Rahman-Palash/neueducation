@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
 import type { ReactNode } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,55 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 export function AnimatedLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (prefersReducedMotion || typeof window === "undefined") return;
-
-    const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
-      lerp: 0.08,
-    });
-
-    const updateScrollTrigger = () => ScrollTrigger.update();
-    lenis.on("scroll", updateScrollTrigger);
-
-    ScrollTrigger.scrollerProxy(document.documentElement, {
-      scrollTop(value) {
-        if (arguments.length && typeof value === "number") {
-          lenis.scrollTo(value, { immediate: false });
-          return;
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-      },
-      pinType: document.documentElement.style.transform ? "transform" : "fixed",
-    });
-
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafRef.current = requestAnimationFrame(raf);
-    };
-
-    rafRef.current = requestAnimationFrame(raf);
-
-    const onRefresh = () => {
-      requestAnimationFrame((time) => lenis.raf(time));
-    };
-    ScrollTrigger.addEventListener("refresh", onRefresh);
-    ScrollTrigger.refresh();
-
-    return () => {
-      lenis.off("scroll", updateScrollTrigger);
-      ScrollTrigger.removeEventListener("refresh", onRefresh);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      lenis.destroy();
-    };
-  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -142,46 +92,15 @@ export function AnimatedLayout({ children }: { children: ReactNode }) {
             },
           );
         });
-
-        gsap.utils.toArray<SVGPathElement>(".draw-path").forEach((path) => {
-          const length = path.getTotalLength();
-          path.style.strokeDasharray = `${length}`;
-          path.style.strokeDashoffset = `${length}`;
-          gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 1,
-            ease: "power1.out",
-            scrollTrigger: {
-              trigger: path,
-              start: "top 90%",
-              end: "top 72%",
-              scrub: true,
-            },
-          });
-        });
-
-        gsap.utils.toArray<HTMLElement>(".draw-heading").forEach((heading) => {
-          const path = heading.querySelector<SVGPathElement>("path");
-          if (!path) return;
-          const length = path.getTotalLength();
-          path.style.strokeDasharray = `${length}`;
-          path.style.strokeDashoffset = `${length}`;
-          gsap.to(path, {
-            strokeDashoffset: 0,
-            duration: 0.8,
-            ease: "power1.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 92%",
-              end: "top 72%",
-              scrub: true,
-            },
-          });
-        });
       }
     }, document.body);
 
-    return () => ctx.revert();
+    ScrollTrigger.refresh();
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ctx.revert();
+    };
   }, [pathname, prefersReducedMotion]);
 
   if (prefersReducedMotion) return <>{children}</>;
